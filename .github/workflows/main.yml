@@ -1,4 +1,4 @@
-name: Build iOS App
+name: Build (All platforms)
 
 on:
   workflow_dispatch:
