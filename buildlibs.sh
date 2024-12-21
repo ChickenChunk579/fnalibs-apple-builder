@@ -62,8 +62,6 @@ elif [ $1 = "ci" ]; then
 	MACOS=1
 	IOS=1
 	IOS_SIM=1
-	TVOS=1
-	TVOS_SIM=1
 	SKIP_INPUT=1
 elif [ $1 = "clean" ]; then
 	rm -rf ./bin/
@@ -368,7 +366,7 @@ function buildMVK()
 		./fetchDependencies --tvos -v
 		make tvos
 		cd ..
-		cp $MVK_DIR/Package/Release/MoltenVK/MoltenVK.xcframework/tvos-arm64_arm64e/libMoltenVK.a ./bin/tvos/device
+		cp $MVK_DIR/Package/Release/MoltenVK/MoltenVK.xcframework/tvos-arm64/libMoltenVK.a ./bin/tvos/device
 	fi
 }
 
