@@ -79,7 +79,15 @@ elif [ $1 = "clean" ]; then
 
 	exit 0
 else
-	error
+	if [ "$2" = "-ci" ]; then
+        MACOS=1
+		IOS=1
+		IOS_SIM=1
+		TVOS=1
+		TVOS_SIM=1
+	else
+		error
+    fi
 fi
 
 # Build the bin/ directories if needed
