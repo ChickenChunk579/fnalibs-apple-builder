@@ -17,7 +17,7 @@ jobs:
         bash updatelibs.sh
     - name: Build
       run: |
-        bash buildlibs.sh all
+        bash buildlibs.sh all -ci
     
     - uses: actions/upload-artifact@v3
       with:

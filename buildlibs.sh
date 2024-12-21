@@ -365,10 +365,17 @@ function buildMVK()
 	fi
 }
 
+function skip_input() {
+    if [ "$2" = "-ci" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # Build 'em all!
 buildSDL && buildFNA3D && buildFAudio && buildTheorafile && buildStubs
 
-while true; do
+while !skip_input; do
     read -p "Do you want to build MoltenVK as well? This is required for FNA3D, but building takes a while so it can be skipped on subsequent rebuilds. (y/n) " yn
     case $yn in
         [Yy]* ) buildMVK; break;;
@@ -376,3 +383,8 @@ while true; do
         * ) echo "Please answer y/n.";;
     esac
 done
+
+if ! skip_input; then
+	buildMVK
+	exit
+fi
