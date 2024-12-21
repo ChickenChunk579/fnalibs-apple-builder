@@ -58,6 +58,13 @@ elif [ $1 = "all" ]; then
 	IOS_SIM=1
 	TVOS=1
 	TVOS_SIM=1
+elif [ $1 = "ci" ]; then
+	MACOS=1
+	IOS=1
+	IOS_SIM=1
+	TVOS=1
+	TVOS_SIM=1
+	SKIP_INPUT=1
 elif [ $1 = "clean" ]; then
 	rm -rf ./bin/
 
@@ -79,15 +86,7 @@ elif [ $1 = "clean" ]; then
 
 	exit 0
 else
-	if [ "$2" = "-ci" ]; then
-        MACOS=1
-		IOS=1
-		IOS_SIM=1
-		TVOS=1
-		TVOS_SIM=1
-	else
-		error
-    fi
+	error
 fi
 
 # Build the bin/ directories if needed
@@ -374,7 +373,7 @@ function buildMVK()
 }
 
 function skip_input() {
-    if [ "$2" = "-ci" ]; then
+    if [ "$SKIP_INPUT" = 1 ]; then
         return 0
     fi
     return 1
