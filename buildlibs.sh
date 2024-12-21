@@ -382,16 +382,15 @@ function skip_input() {
 # Build 'em all!
 buildSDL && buildFNA3D && buildFAudio && buildTheorafile && buildStubs
 
-while !skip_input; do
-    read -p "Do you want to build MoltenVK as well? This is required for FNA3D, but building takes a while so it can be skipped on subsequent rebuilds. (y/n) " yn
-    case $yn in
-        [Yy]* ) buildMVK; break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer y/n.";;
-    esac
-done
-
-if ! skip_input; then
-	buildMVK
-	exit
+if [ $1 = "ci" ]; then
+	buildMVK;
+else
+	while !skip_input; do
+		read -p "Do you want to build MoltenVK as well? This is required for FNA3D, but building takes a while so it can be skipped on subsequent rebuilds. (y/n) " yn
+		case $yn in
+			[Yy]* ) buildMVK; break;;
+			[Nn]* ) exit;;
+			* ) echo "Please answer y/n.";;
+		esac
+	done
 fi
